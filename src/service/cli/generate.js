@@ -1,5 +1,7 @@
 'use strict';
 
+const chalk = require(`chalk`);
+
 const {
   getRandomInt,
   shuffle,
@@ -81,18 +83,18 @@ module.exports = {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
     if (countOffer > 1000) {
-      console.error(`Не больше 1000 публикаций...`);
+      console.error(chalk.red(`Не больше 1000 публикаций...`));
       return;
     }
 
     const content = JSON.stringify(generateOffers(countOffer));
     fs.writeFile(FILE_NAME, content, (err) => {
       if (err) {
-        console.error(`Не могу создать файл...`);
+        console.error(chalk.red(`Не могу создать файл...`));
         return;
       }
 
-      console.info(`Файл успешно создан.`);
+      console.info(chalk.green(`Файл успешно создан.`));
     });
   }
 };
