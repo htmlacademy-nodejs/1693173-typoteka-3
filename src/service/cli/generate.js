@@ -27,8 +27,8 @@ const readContent = async (filePath) => {
 
 const generateDate = () => {
   const date = new Date(getRandomInt(Date.now() - 7889400000, Date.now()));
-  return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-}
+  return date.getFullYear() + `-` + (date.getMonth() + 1) + `-` + date.getDate() + ` ` + date.getHours() + `:` + date.getMinutes() + `:` + date.getSeconds();
+};
 
 const generateOffers = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
@@ -57,7 +57,7 @@ module.exports = {
       await fs.writeFile(FILE_NAME, content);
       console.info(chalk.green(`Файл успешно создан.`));
     } catch (err) {
-        console.error(chalk.red(`Не могу создать файл...`));
+      console.error(chalk.red(`Не могу создать файл...`));
     }
   }
 };
