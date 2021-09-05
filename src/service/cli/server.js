@@ -16,25 +16,26 @@ const HttpCode = {
   UNAUTHORIZED: 401,
 };
 
-app.use(express.json());
-
-app.get(`/posts`, async (req, res) => {
-  try {
-    const fileContent = await fs.readFile(MOCK_FILE_PATH);
-    const mocks = JSON.parse(fileContent);
-    res.json(mocks);
-  } catch (_err) {
-    res.send([]);
-  }
-});
-
-app.use((req, res) => res
-  .status(HttpCode.NOT_FOUND)
-  .send(`Not found`));
 
 module.exports = {
   name: `--server`,
   run(args) {
+    app.use(express.json());
+
+    app.get(`/posts`, async (req, res) => {
+      try {
+        const fileContent = await fs.readFile(MOCK_FILE_PATH);
+        const mocks = JSON.parse(fileContent);
+        res.json(mocks);
+      } catch (_err) {
+        res.send([]);
+      }
+    });
+
+    app.use((req, res) => res
+      .status(HttpCode.NOT_FOUND)
+      .send(`Not found`));
+
     const serverPort = Number.parseInt(args, 10) || DEFAULT_PORT;
     app.listen(serverPort);
   }
